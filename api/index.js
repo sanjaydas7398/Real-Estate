@@ -7,7 +7,6 @@ import authRouter from "./routes/auth.route.js"
 dotenv.config();
 
 const PORT = 5000
-
 mongoose.connect(process.env.MONGO).then(()=>{console.log("db connection succesfully")}).catch((error)=>{console.log(error)})
 
 const app = express();
