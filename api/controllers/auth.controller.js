@@ -35,8 +35,9 @@ export const signin = async(req,res,next)=>{
 
            const token = jwt.sign({id:validUser.id}, process.env.JWTTOKEN);
 
-           const{password:pass, ...res} = validUser._doc;
-           res.cookie('access_token',token,{httpOnly:true}).status(200).json(res);
+           const userWithoutPassword = validUser.toObject();
+           delete userWithoutPassword.password;
+           res.cookie('access_token',token,{httpOnly:true}).status(200).json(userWithoutPassword);
 
         }catch(error){
             next(error)
